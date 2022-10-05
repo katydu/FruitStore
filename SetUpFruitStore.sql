@@ -39,7 +39,7 @@ CREATE TABLE Products
 (
   [ProductID]         INT          NOT NULL,
   [ProductName]       NVARCHAR(20) NOT NULL,
-  [ProductUnitPrice]  INT     NOT NULL,
+  [ProductUnitPrice]  INT		   NOT NULL,
   [ProductImg]        NVARCHAR(60) NULL,
   PRIMARY KEY(ProductID),
 );
