@@ -9,24 +9,50 @@ namespace FruitStore.Controllers
     public class StoreDataController : Controller
     {
         readonly Models.MembersData membersData = new Models.MembersData();
+        readonly Models.MemberService memberService = new Models.MemberService();
+
+        [HttpGet()]
         public ActionResult Index()
         {
-
             return View();
         }
 
-        public ActionResult About()
+        [HttpGet()]
+        public ActionResult MemberLogIn()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        /// <summary>
+        /// 會員登入
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult MemberLogIn(Models.MembersData membersData)
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
+
+        [HttpGet()]
+        public ActionResult MemberRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult MemberRegister(Models.MembersData membersData)
+        {
+
+            if (ModelState.IsValid)
+            {
+                this.memberService.AddMember(membersData);
+                //TempData["message"] = "書籍 (" + membersData.MemberName + ") 註冊成功";
+                ModelState.Clear();
+                return View("MemberLogIn");
+            }
+            return View();
+        }
+
     }
 }

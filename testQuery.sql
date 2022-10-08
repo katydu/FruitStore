@@ -1,3 +1,6 @@
+USE FruitStore
+GO
+
 --新增會員資料
 
 DECLARE @MemberName NVARCHAR(20)

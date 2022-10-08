@@ -24,9 +24,9 @@ namespace FruitStore.Models
         /// <summary>
         /// 將會員資料加到資料庫中
         /// </summary>
-        /// <param name="Data"></param>
+        /// <param name="membersData"></param>
         /// <returns></returns>
-        public void AddBook(Models.BookData Data)
+        public void AddMember(Models.MembersData membersData)
         {
             string sql = @" INSERT INTO Members(
                             MemberName, MemberEmail, MemberAddress, MemberPhone) 
@@ -37,19 +37,10 @@ namespace FruitStore.Models
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.Add(new SqlParameter("@BookName", Data.BookName));
-                cmd.Parameters.Add(new SqlParameter("@ClassId", Data.ClassId));
-                cmd.Parameters.Add(new SqlParameter("@Author", Data.BookAuthor));
-                cmd.Parameters.Add(new SqlParameter("@BoughtDate", Convert.ToDateTime(Data.BoughtDate)));
-                cmd.Parameters.Add(new SqlParameter("@Publisher", Data.Publisher));
-                cmd.Parameters.Add(new SqlParameter("@BookNote", Data.BookNote));
-                cmd.Parameters.Add(new SqlParameter("@BookStatus", "A"));
-                cmd.Parameters.Add(new SqlParameter("@BooKeeper", ""));
-                cmd.Parameters.Add(new SqlParameter("@BoughtFee", 10000));
-                cmd.Parameters.Add(new SqlParameter("@CreateDate", Today));
-                cmd.Parameters.Add(new SqlParameter("@CreateUser", User));
-                cmd.Parameters.Add(new SqlParameter("@ModifyDate", Today));
-                cmd.Parameters.Add(new SqlParameter("@ModifyUser", User));
+                cmd.Parameters.Add(new SqlParameter("@MemberName", membersData.MemberName));
+                cmd.Parameters.Add(new SqlParameter("@MemberEmail", membersData.MemberEmail));
+                cmd.Parameters.Add(new SqlParameter("@MemberAddress", membersData.MemberAddress));
+                cmd.Parameters.Add(new SqlParameter("@MemberPhone", membersData.MemberPhone));
 
                 SqlTransaction Transaction = conn.BeginTransaction();
                 cmd.Transaction = Transaction;

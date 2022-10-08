@@ -162,6 +162,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\StoreData\Index.cshtml" />
+    <Content Include="Views\StoreData\MemberRegister.cshtml" />
+    <Content Include="Views\StoreData\MemberLogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
