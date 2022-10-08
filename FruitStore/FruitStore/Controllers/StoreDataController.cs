@@ -6,10 +6,12 @@ using System.Web.Mvc;
 
 namespace FruitStore.Controllers
 {
-    public class HomeController : Controller
+    public class StoreDataController : Controller
     {
+        readonly Models.MembersData membersData = new Models.MembersData();
         public ActionResult Index()
         {
+
             return View();
         }
 
