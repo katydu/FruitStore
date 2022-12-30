@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Products>
+
+<div class="row ml-1">
+    @foreach (var obj in Model)
+    {
+        <div class="col m-4">
+            <div class="card h-100 shadow-sm rounded" style="width: 16rem">
+                <img src="@obj.ProductImg" class="card-img-top" alt="@obj.ProductName">
+                <div class="card-body">
+                    <h5 class="card-title">@obj.ProductName</h5>
+                    <p class="card-text">Descriptions</p>
+                </div>
+                <div class="card-footer btn btn-light" style="position:relative;">
+                    <div class="text-center">
+                        @*<button id="content" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddCartModel">檢視</button>*@
+                        <button id="addCart" data-bs-toggle="modal" data-bs-target="#product-@obj.ProductID" class="btn btn-primary">加入購物車</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="product-@obj.ProductID" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@obj.ProductName</h5>
+                        <button type="button" class="closeModel btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Please enter your quantity of product</p>
+                        <button class="minus btn btn-outline-primary"><i class="bi bi-dash"></i></button>
+                        <input class="quantity" type="text" value="0" style="text-align:center" />
+                        <button class="plus btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="closeModel btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-primary addcart" onclick="AddCartBtn(@obj.ProductID)" >加入購物車</a>
+                        @*asp-controller="Product" asp-action="Cart" asp-route-id="@obj.ProductID" asp-route-quantity="currentQuantity"  onclick="AddCartBtn(@obj.ProductID)"*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script type="text/javascript">
+    //https://localhost:7028/Product/Cart/3?quantity=1
+
+    // clean the value in quantity input
+    $(".closeModel").click(function () {
+        const QuantityTextBox = $(".quantity");
+        QuantityTextBox.val(0);
+    });
+
+    $(".plus").click(function () {
+        const QuantityTextBox = $(".quantity");
+        var num = parseInt(QuantityTextBox.val());
+        num = num + 1
+        QuantityTextBox.val(num);
+    });
+    $(".minus").click(function () {
+        const QuantityTextBox = $(".quantity");
+        var num = parseInt(QuantityTextBox.val());
+        if (num == 0) {
+            // disable minus button
+        } else {
+            num = num - 1
+        }
+        QuantityTextBox.val(num);
+    });
+    // avoid user enter invaild number in quantity input
+    $(".quantity").change(function () {
+        const QuantityTextBox = $(".quantity");
+        var num = parseInt(QuantityTextBox.val());
+        if (num < 0) {
+            QuantityTextBox.val(0);
+        }
+    });
+
+    function AddCartBtn(id) {
+        currentQuantity = $(".quantity").val();
+        // change routing
+        $('.addcart').attr('href', '/Product/AddCart/' + id + '?quantity=' + currentQuantity);
+        var modeID = '#product-' + id;
+        // clean the quantity
+        $(".quantity").val(0);
+        // hide model
+        $(modeID).modal('hide');
+    }
+</script>

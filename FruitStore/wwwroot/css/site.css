@@ -1,0 +1,37 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/*將表單置中縮小*/
+form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.quantity {
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+}
+
+.card-body {
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid;
+}

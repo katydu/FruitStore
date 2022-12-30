@@ -1,0 +1,93 @@
+﻿@using FruitStore.Models;
+@using FruitStore.Helper;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<CartClass>
+
+<table border="1">
+    <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+    </tr>
+    @foreach (var cart in Model)
+    {
+        <tr>
+            <td>@cart.Product.ProductName</td>
+            <td>@cart.Product.ProductUnitPrice</td>
+            @*<td>
+                    <button class="minus btn btn-outline-primary"><i class="bi bi-dash"></i></button>
+                    <input class="quantity" type="text" value="@cart.Quantity" style="text-align:center; width:100px" />
+                    <button class="plus btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+                </td>*@
+            <td>
+                @cart.Quantity
+            </td>
+            <td>@cart.TotalPrice</td>
+            <td>
+                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart-@cart.Product.ProductID">update</a>
+                <a class="btn btn-secondary" asp-controller="Product" asp-action="RemoveItem" asp-route-id="@cart.Product.ProductID">delete</a>
+            </td>
+        </tr>
+        <div id="cart-@cart.Product.ProductID" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@cart.Product.ProductName</h5>
+                        <button type="button" class="closeModel btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Please enter your new quantity of the product</p>
+                        <button class="minus btn btn-outline-primary"><i class="bi bi-dash"></i></button>
+                        <input class="quantity" type="text" value="@cart.Quantity" style="text-align:center" />
+                        <button class="plus btn btn-outline-primary"><i class="bi bi-plus"></i></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="closeModel btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-primary updateCart" onclick="EditCart(@cart.Product.ProductID)">更改</a>
+                        @*asp-controller="Product" asp-action="Cart" asp-route-id="@obj.ProductID" asp-route-quantity="currentQuantity"  onclick="AddCartBtn(@obj.ProductID)"*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</table>
+<div>
+    <label>TotalPrice:@ViewBag.Total</label>
+</div>
+<div>
+    <button class="btn btn-primary">Confirm Order</button>
+</div>
+
+<script type="text/javascript">
+    $(".plus").click(function () {
+        const QuantityTextBox = $(".quantity");
+        var num = parseInt(QuantityTextBox.val());
+        num = num + 1
+        QuantityTextBox.val(num);
+    });
+    $(".minus").click(function () {
+        const QuantityTextBox = $(".quantity");
+        var num = parseInt(QuantityTextBox.val());
+        if (num == 0) {
+         // disable minus button
+        } else {
+            num = num - 1
+        }
+        QuantityTextBox.val(num);
+    });
+    // avoid user enter invaild number in quantity input
+    $(".quantity").change(function () {
+        const QuantityTextBox = $(".quantity");
+        var num = parseInt(QuantityTextBox.val());
+        if (num < 0) {
+            QuantityTextBox.val(0);
+        }
+    });
+    function EditCart(id) {
+        const QuantityTextBox = $(".quantity");
+        var num = parseInt(QuantityTextBox.val());
+        $('.updateCart').attr('href', '/Product/EditItem/' + id + '?quantity=' + num);
+    }
+</script>

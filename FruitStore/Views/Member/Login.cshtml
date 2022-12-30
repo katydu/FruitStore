@@ -1,0 +1,27 @@
+﻿@model Members
+@*<h2>@User.Identity.Name</h2>
+<h2>@User.Identity.IsAuthenticated</h2>*@
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Login</h2>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All"></div>*@
+        <div class="mb-3">
+            <label asp-for="MemberPhone"></label>
+            <input asp-for="MemberPhone" class="form-control" />
+            <span asp-validation-for="MemberPhone" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="MemberPassword"></label>
+            <input type="password" asp-for="MemberPassword" class="form-control" />
+            <span asp-validation-for="MemberPassword" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Login</button>
+        <a asp-controller="Member" asp-action="Register" class="btn btn-secondary" style="width:150px">
+            Register
+        </a>
+    </div>
+</form>

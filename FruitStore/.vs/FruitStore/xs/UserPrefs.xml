@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{9DF73F77-BD17-4B8E-8579-0B7F1ADE46E9}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Product/Cart.cshtml">
+    <Files>
+      <File FileName="Views/Product/Index.cshtml" />
+      <File FileName="Controllers/ProductController.cs" />
+      <File FileName="Views/Product/Cart.cshtml" Line="24" Column="17" />
+      <File FileName="Views/Shared/_Layout.cshtml" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FruitStore" expanded="True">
+            <Node name="FruitStore" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Member" expanded="True" />
+                <Node name="Product" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.FruitStore PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
